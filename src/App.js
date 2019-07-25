@@ -1,20 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Person from './Person/Person';
 
 class App extends Component {
+  state = {
+    persons: [
+      { name: 'Prijesh', age: 32 },
+      { name: 'Jijina', age: 31 },
+      { name: 'Aadhith', age: 5 },
+    ]
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>Hi, I'm a React App</h1>
+        <p>It's working fine</p>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
+        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        {/* <Person name="Jijina" age="31" />
+        <Person name="Aadhith" age="5">
+          My Hobby: Coloring
+        </Person> */}
       </div>
     );
+  }
+
+  switchNameHandler = event => {
+    console.log("Clicked!!!");
+    // DON'T DO THIS: this.state.persons[0].name = 'Prijesh Meppayil';
+    this.setState({
+      persons: [
+        { name: 'Prijesh Meppayil', age: 32 },
+        { name: 'Jijina', age: 31 },
+        { name: 'Aadhith', age: 5 },
+      ]
+    })
+
   }
 }
 
