@@ -8,9 +8,10 @@ const App = () => {
       { name: 'Prijesh', age: 32 },
       { name: 'Jijina', age: 31 },
       { name: 'Aadhith', age: 5 },
-    ],
-    other: 'Some other state'
-  })
+    ]
+  });
+
+  const [otherState, setOtherState] = useState('Some other state');
 
   const switchNameHandler = event => {
     console.log("Clicked!!!");
@@ -20,12 +21,11 @@ const App = () => {
         { name: 'Prijesh Meppayil', age: 32 },
         { name: 'Jijina', age: 31 },
         { name: 'Aadhith', age: 5 },
-      ],
-      other: personsState.other
+      ]
     })
   }
 
-  console.log('personsState', personsState);
+  console.log('personsState', personsState, 'otherState', otherState);
   
 
   return (
