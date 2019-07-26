@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
   state = {
@@ -8,7 +10,8 @@ class App extends Component {
       { name: 'Prijesh', age: 32 },
       { name: 'Jijina', age: 31 },
       { name: 'Aadhith', age: 5 },
-    ]
+    ],
+    username: 'Jijina Prijesh'
   }
 
   render() {
@@ -38,8 +41,19 @@ class App extends Component {
           click={() => this.switchNameHandler('Aadhith M')}
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age} />
+        
+        <UserInput username={this.state.username} changed={this.changeUserName}/>
+        <UserOutput username={this.state.username}/>
+        <UserOutput username={this.state.username}/>
+        <UserOutput username={this.state.username}/>
       </div>
     );
+  }
+
+  changeUserName = event => {
+    this.setState({
+      username: event.target.value
+    })
   }
 
   switchNameHandler = newName => {
