@@ -8,7 +8,8 @@ class App extends Component {
       { name: 'Prijesh', age: 32 },
       { name: 'Jijina', age: 31 },
       { name: 'Aadhith', age: 5 },
-    ]
+    ],
+    showPersons: false
   }
 
   render() {
@@ -25,19 +26,27 @@ class App extends Component {
         <p>It's working fine</p>
         <button 
           style={style}
-          onClick={() => this.switchNameHandler('Jijina Prijesh')}>Switch Name</button>
-        <Person
-          click={this.switchNameHandler.bind(this, 'Priju')}
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <Person 
-          changed={this.nameChangeHandler}
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} />
-        <Person 
-          click={() => this.switchNameHandler('Aadhith M')}
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        {
+          this.state.showPersons
+          ? <div>
+              <Person
+                click={this.switchNameHandler.bind(this, 'Priju')}
+                name={this.state.persons[0].name} 
+                age={this.state.persons[0].age} />
+              <Person 
+                changed={this.nameChangeHandler}
+                name={this.state.persons[1].name} 
+                age={this.state.persons[1].age} />
+              <Person 
+                click={() => this.switchNameHandler('Aadhith M')}
+                name={this.state.persons[2].name} 
+                age={this.state.persons[2].age} />
+            </div>
+          : null
+        }
+        
+        
       </div>
     );
   }
@@ -63,6 +72,11 @@ class App extends Component {
         { name: 'Aadhith', age: 5 },
       ]
     })
+  }
+
+  togglePersonsHandler = event => {
+    event.preventDefault();
+    this.setState({showPersons: !this.state.showPersons});
   }
 }
 
