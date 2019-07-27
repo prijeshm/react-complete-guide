@@ -28,6 +28,7 @@ class App extends Component {
           {
             this.state.persons.map((person, index) => {
               return <Person 
+                key={index}
                 name={person.name} 
                 age={person.age} 
                 click={() => this.deletePersonHandler(index)}/>;
@@ -67,7 +68,7 @@ class App extends Component {
     // copying the data
     //const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
-    
+
     persons.splice(personIndex, 1);
     this.setState({persons});
   }
