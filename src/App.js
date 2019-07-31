@@ -5,9 +5,9 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Prijesh', age: 32 },
-      { name: 'Jijina', age: 31 },
-      { name: 'Aadhith', age: 5 },
+      { id: 1, name: 'Prijesh', age: 32 },
+      { id: 2, name: 'Jijina', age: 31 },
+      { id: 3, name: 'Aadhith', age: 5 },
     ],
     showPersons: false
   }
@@ -28,9 +28,10 @@ class App extends Component {
           {
             this.state.persons.map((person, index) => {
               return <Person 
-                key={index}
+                key={person.id}
                 name={person.name} 
                 age={person.age} 
+                changed={(e) => this.switchNameHandler(e, person.id)}
                 click={() => this.deletePersonHandler(index)}/>;
             })
           }
@@ -51,17 +52,16 @@ class App extends Component {
     );
   }
 
-  switchNameHandler = newName => {
-    console.log("Clicked!!!");
-    newName = newName ? newName : '';
-    // DON'T DO THIS: this.state.persons[0].name = 'Prijesh Meppayil';
-    this.setState({
-      persons: [
-        { name: newName, age: 32 },
-        { name: 'Jijina', age: 31 },
-        { name: 'Aadhith', age: 5 },
-      ]
-    })
+  switchNameHandler = (e, id) => {
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
+    const person = {...this.state.persons[personIndex]};
+
+    person.name = e.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({ persons });
   }
 
   deletePersonHandler = (personIndex) => {
